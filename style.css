@@ -25,7 +25,11 @@ body {
 #buttonboard {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+}
+
+button {
+    height: 100%;
+    width: 100%;
 }
 
 #numpad {
@@ -52,25 +56,23 @@ body {
     height: 32px;
     width: auto;
     aspect-ratio: 1/1;
-    background-color:azure;
     flex: 0 0 calc(33% - 5px);
-    border: 2px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+}
+
+.numpadButton button {
     font-weight: 700;
+    background-color: azure;
 }
 
 .operatorButton {
     height: 32px;
     width: auto;
     aspect-ratio: 1/1;
-    background-color:cadetblue;
     flex: 0 0 calc(90%);
-    border: 2px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+}
+
+.operatorButton button {
     font-weight: 700;
+    background-color: rgb(127, 187, 189);
     color: red;
 }
