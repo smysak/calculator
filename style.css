@@ -22,6 +22,12 @@ body {
     border: 1px solid black;
 }
 
+#buttonboard {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
 #numpad {
     display:flex;
     gap: 2px;
@@ -29,6 +35,17 @@ body {
     margin: 8px;
     justify-content: center;
     align-items: center;
+    flex: 0 0 calc(75% - 10px)
+}
+
+#operators {
+    display: flex;
+    gap: 2px;
+    flex-wrap: wrap;
+    margin: 8px 8px 8px 0px;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 calc(25% - 10px)
 }
 
 .numpadButton {
@@ -41,4 +58,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: 700;
+}
+
+.operatorButton {
+    height: 32px;
+    width: auto;
+    aspect-ratio: 1/1;
+    background-color:cadetblue;
+    flex: 1;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    color: red;
 }
