@@ -3,6 +3,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
+    margin: 0;
 }
 
 .calculatorBody {
@@ -53,6 +55,7 @@ button {
 .functionButton button {
     font-weight: 700;
     background-color: rgb(206, 132, 203);
+    color: rgb(31, 29, 29)
 }
 
 #mainButtonboard {
@@ -125,5 +128,5 @@ button {
 .operatorButton button {
     font-weight: 700;
     background-color: rgb(127, 187, 189);
-    color: red;
+    color: rgb(169, 27, 27);
 }
