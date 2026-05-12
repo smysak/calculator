@@ -1,3 +1,5 @@
+let variable = "_"
+
 const displayScreen = document.getElementById("numDisplay");
 
 const button1 = document.getElementById("1");
@@ -13,7 +15,8 @@ const button0 = document.getElementById("0");
 
 
 handleButtonPress = function(x) {
-    displayScreen.innerText = x;
+    variable = x;
+    displayScreen.innerText = variable;
 }
 
 button1.addEventListener('click', () => handleButtonPress(1));
