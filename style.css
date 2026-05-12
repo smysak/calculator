@@ -28,6 +28,12 @@ button {
     background-color:gainsboro;
     margin: 8px;
     border: 1px solid black;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 8px;
+    font-size: 32px;
+    font-family:'Courier New', Courier, monospace;
 }
 
 #headButtonboard {
