@@ -7,11 +7,17 @@ body {
 
 .calculatorBody {
     background-color: peachpuff;
-    height: 80vh;
-    width: 80vh;
+    max-height: 80vh;
+    max-width: 50vh;
     margin: 32px;
     border: 8px solid black;
     border-radius: 3px;
+    padding: 8px;
+}
+
+button {
+    height: 100%;
+    width: 100%;
 }
 
 #displayScreen {
@@ -22,14 +28,59 @@ body {
     border: 1px solid black;
 }
 
-#buttonboard {
+#headButtonboard {
+    display:flex;
+    justify-content: center;
+}
+
+#functions {
+    display:flex;
+    gap: 2px;
+    flex-wrap: wrap;
+    margin: 8px 8px 0px 8px;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 calc(75% - 8px)
+}
+
+.functionButton {
+    height: 32px;
+    width: auto;
+    aspect-ratio: 1/1;
+    flex: 0 0 calc(25% - 5px);
+}
+
+.functionButton button {
+    font-weight: 700;
+    background-color: rgb(206, 132, 203);
+}
+
+#mainButtonboard {
     display: flex;
     justify-content: center;
 }
 
-button {
-    height: 100%;
-    width: 100%;
+#clear {
+    display: flex;
+    gap: 2px;
+    flex-wrap: wrap;
+    margin: 8px 8px 0px 0px;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 calc(25% - 10px)
+}
+
+.clearButton {
+    height: 32px;
+    width: auto;
+    aspect-ratio: 1/1;
+    flex: 0 0 calc(90%);
+}
+
+.clearButton button {
+    font-weight: 700;
+    background-color: darkslategrey;
+    color: aliceblue;
 }
 
 #numpad {
