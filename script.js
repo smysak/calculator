@@ -1,4 +1,4 @@
-let variable = "_"
+let variable = ""
 
 const displayScreen = document.getElementById("numDisplay");
 
@@ -15,7 +15,7 @@ const button0 = document.getElementById("0");
 
 
 handleButtonPress = function(x) {
-    variable = x;
+    variable = variable + x;
     displayScreen.innerText = variable;
 }
 
