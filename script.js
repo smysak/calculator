@@ -2,6 +2,8 @@ let variable1 = "";
 let operator = "";
 let variable2 = "";
 
+let executed = "";
+
 
 const calculate = {
   '+': (a, b) => a + b,
@@ -29,6 +31,8 @@ const buttonSubtract = document.getElementById("subtract");
 const buttonMultiply = document.getElementById("multiply");
 const buttonDivide = document.getElementById("divide");
 
+const buttonExecute = document.getElementById("execute");
+
 handleButtonPress = function(x) {
     if (operator === "") {
         variable1 = variable1 + x;
@@ -40,8 +44,10 @@ handleButtonPress = function(x) {
 }
 
 handleOperatorPress = function(y) {
-    if (variable2 === "") {
+    if (variable2 === "" || executed === "yes") {
         operator = y;
+        executed = "";
+        variable2 = "";
     } else {
         variable1 = calculate[operator](Number(variable1), Number(variable2));
         operator = y;
@@ -49,6 +55,15 @@ handleOperatorPress = function(y) {
         displayScreen.innerText = variable1;
     }
 }
+
+handleExecution = function() {
+    if (variable1 != "" && variable2 != "") {
+        variable1 = calculate[operator](Number(variable1), Number(variable2));
+        displayScreen.innerText = variable1;
+        executed = "yes";
+    }
+}
+
 
 button1.addEventListener('click', () => handleButtonPress(1));
 button2.addEventListener('click', () => handleButtonPress(2));
@@ -65,3 +80,5 @@ buttonAdd.addEventListener('click', () => handleOperatorPress(`+`));
 buttonSubtract.addEventListener('click', () => handleOperatorPress(`-`));
 buttonMultiply.addEventListener('click', () => handleOperatorPress(`*`));
 buttonDivide.addEventListener('click', () => handleOperatorPress(`/`));
+
+buttonExecute.addEventListener('click', () => handleExecution());
