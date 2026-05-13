@@ -34,7 +34,14 @@ const buttonDivide = document.getElementById("divide");
 const buttonExecute = document.getElementById("execute");
 
 handleButtonPress = function(x) {
-    if (operator === "") {
+    if (executed === "yes") {
+        variable1 = "";
+        variable2 = "";
+        operator = "";
+        executed = "";
+        variable1 = variable1 + x;
+        displayScreen.innerText = variable1;
+    } else if (operator === "") {
         variable1 = variable1 + x;
         displayScreen.innerText = variable1;
     } else {
@@ -49,7 +56,7 @@ handleOperatorPress = function(y) {
         executed = "";
         variable2 = "";
     } else {
-        variable1 = calculate[operator](Number(variable1), Number(variable2));
+        variable1 = calculate[operator](Number(variable1), Number(variable2)).toString();
         operator = y;
         variable2 = "";
         displayScreen.innerText = variable1;
@@ -58,7 +65,7 @@ handleOperatorPress = function(y) {
 
 handleExecution = function() {
     if (variable1 != "" && variable2 != "") {
-        variable1 = calculate[operator](Number(variable1), Number(variable2));
+        variable1 = calculate[operator](Number(variable1), Number(variable2)).toString();
         displayScreen.innerText = variable1;
         executed = "yes";
     }
