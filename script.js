@@ -1,4 +1,6 @@
-let variable = ""
+let variable1 = "";
+let operator = "";
+let variable2 = "";
 
 const displayScreen = document.getElementById("numDisplay");
 
@@ -13,10 +15,21 @@ const button8 = document.getElementById("8");
 const button9 = document.getElementById("9");
 const button0 = document.getElementById("0");
 
+const buttonAdd = document.getElementById("add");
 
 handleButtonPress = function(x) {
-    variable = variable + x;
-    displayScreen.innerText = variable;
+    if (operator === "") {
+        variable1 = variable1 + x;
+        displayScreen.innerText = variable1;
+    } else {
+        variable2 = variable2 + x;
+        displayScreen.innerText = variable2;
+    }
+}
+
+handleOperatorPress = function(y) {
+    operator = y;
+    displayScreen.innerText = operator;
 }
 
 button1.addEventListener('click', () => handleButtonPress(1));
@@ -30,3 +43,4 @@ button8.addEventListener('click', () => handleButtonPress(8));
 button9.addEventListener('click', () => handleButtonPress(9));
 button0.addEventListener('click', () => handleButtonPress(0));
 
+buttonAdd.addEventListener('click', () => handleOperatorPress(`+`));
