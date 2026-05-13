@@ -2,6 +2,15 @@ let variable1 = "";
 let operator = "";
 let variable2 = "";
 
+
+const calculate = {
+  '+': (a, b) => a + b,
+  '-': (a, b) => a - b,
+  '*': (a, b) => a * b,
+  '/': (a, b) => a / b,
+};
+
+
 const displayScreen = document.getElementById("numDisplay");
 
 const button1 = document.getElementById("1");
@@ -16,6 +25,9 @@ const button9 = document.getElementById("9");
 const button0 = document.getElementById("0");
 
 const buttonAdd = document.getElementById("add");
+const buttonSubtract = document.getElementById("subtract");
+const buttonMultiply = document.getElementById("multiply");
+const buttonDivide = document.getElementById("divide");
 
 handleButtonPress = function(x) {
     if (operator === "") {
@@ -28,8 +40,14 @@ handleButtonPress = function(x) {
 }
 
 handleOperatorPress = function(y) {
-    operator = y;
-    displayScreen.innerText = operator;
+    if (variable2 === "") {
+        operator = y;
+    } else {
+        variable1 = calculate[operator](Number(variable1), Number(variable2));
+        operator = y;
+        variable2 = "";
+        displayScreen.innerText = variable1;
+    }
 }
 
 button1.addEventListener('click', () => handleButtonPress(1));
@@ -44,3 +62,6 @@ button9.addEventListener('click', () => handleButtonPress(9));
 button0.addEventListener('click', () => handleButtonPress(0));
 
 buttonAdd.addEventListener('click', () => handleOperatorPress(`+`));
+buttonSubtract.addEventListener('click', () => handleOperatorPress(`-`));
+buttonMultiply.addEventListener('click', () => handleOperatorPress(`*`));
+buttonDivide.addEventListener('click', () => handleOperatorPress(`/`));
