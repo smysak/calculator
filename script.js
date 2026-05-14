@@ -10,6 +10,8 @@ const calculate = {
   '-': (a, b) => a - b,
   '*': (a, b) => a * b,
   '/': (a, b) => a / b,
+  '**': (a, b) => a ** b,
+  '√': (a, b) => b ** (1/a),
 };
 
 
@@ -50,6 +52,8 @@ const buttonAdd = document.getElementById("add");
 const buttonSubtract = document.getElementById("subtract");
 const buttonMultiply = document.getElementById("multiply");
 const buttonDivide = document.getElementById("divide");
+const buttonExponent = document.getElementById("exponent");
+const buttonRoot = document.getElementById("root");
 
 const buttonClear = document.getElementById("clearAll");
 
@@ -133,6 +137,8 @@ buttonAdd.addEventListener('click', () => handleOperatorPress(`+`));
 buttonSubtract.addEventListener('click', () => handleOperatorPress(`-`));
 buttonMultiply.addEventListener('click', () => handleOperatorPress(`*`));
 buttonDivide.addEventListener('click', () => handleOperatorPress(`/`));
+buttonExponent.addEventListener('click', () => handleOperatorPress('**'));
+buttonRoot.addEventListener('click', () => handleOperatorPress('√'));
 
 buttonExecute.addEventListener('click', () => handleExecution());
 
