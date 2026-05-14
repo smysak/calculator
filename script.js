@@ -19,7 +19,7 @@ function displayFormat(value) {
     const num = Number(value);
     if (isNaN(num) || !isFinite(num)) {
         executed = "error";
-        return 'UR SO FUNNY';
+        return 'error';
     }
 
     let fixedNum = num.toPrecision(12);
@@ -54,6 +54,8 @@ const buttonMultiply = document.getElementById("multiply");
 const buttonDivide = document.getElementById("divide");
 const buttonExponent = document.getElementById("exponent");
 const buttonRoot = document.getElementById("root");
+
+const buttonFactorial = document.getElementById("bang");
 
 const buttonClear = document.getElementById("clearAll");
 
@@ -121,6 +123,55 @@ handleClearAll = function() {
     displayScreen.innerText = displayFormat(variable1);
 }
 
+handleFactorial = function() {
+    if (variable2 === "") {
+        operator = "";
+
+        const array = [];
+        let num = variable1;
+        for (let i = 0; i < variable1; i++) {
+            array.push(num);
+            num = num-1;
+        };
+        let factorial = array.reduce((accumulator, currentValue) => {
+            return accumulator * currentValue;
+        }, 1);
+
+        if (variable1 !==1 && factorial === 1) {
+            factorial = "NaN";
+        }
+
+        variable1 = factorial;
+        const formattedOutput = displayFormat(variable1);
+        displayScreen.innerText = formattedOutput;
+        executed = "yes";
+    }
+
+    if (variable2 !== "") {
+
+        const array = [];
+        let num = variable2;
+        for (let i = 0; i < variable2; i++) {
+            array.push(num);
+            num = num-1;
+        };
+        let factorial = array.reduce((accumulator, currentValue) => {
+            return accumulator * currentValue;
+        }, 1);
+
+        if (variable2 !==1 && factorial === 1) {
+            factorial = "NaN";
+        }
+
+        variable2 = "";
+        variable1 = calculate[operator](Number(variable1), Number(factorial)).toString();
+        const formattedOutput = displayFormat(variable1);
+        displayScreen.innerText = formattedOutput;
+        operator = "";
+        executed = "yes";
+    }
+}
+
 
 button1.addEventListener('click', () => handleButtonPress(1));
 button2.addEventListener('click', () => handleButtonPress(2));
@@ -139,6 +190,8 @@ buttonMultiply.addEventListener('click', () => handleOperatorPress(`*`));
 buttonDivide.addEventListener('click', () => handleOperatorPress(`/`));
 buttonExponent.addEventListener('click', () => handleOperatorPress('**'));
 buttonRoot.addEventListener('click', () => handleOperatorPress('√'));
+
+buttonFactorial.addEventListener('click', () => handleFactorial());
 
 buttonExecute.addEventListener('click', () => handleExecution());
 
