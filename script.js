@@ -56,10 +56,12 @@ const buttonExponent = document.getElementById("exponent");
 const buttonRoot = document.getElementById("root");
 
 const buttonFactorial = document.getElementById("bang");
+const buttonPercent = document.getElementById("percent");
 
 const buttonClear = document.getElementById("clearAll");
 
 const buttonExecute = document.getElementById("execute");
+
 
 handleButtonPress = function(x) {
     if (executed === "yes" || executed === "error") {
@@ -77,6 +79,7 @@ handleButtonPress = function(x) {
         displayScreen.innerText = displayFormat(variable2);
     }
 }
+
 
 handleOperatorPress = function(y) {
     if (executed === "error") {
@@ -102,6 +105,7 @@ handleOperatorPress = function(y) {
     }
 }
 
+
 handleExecution = function() {
     if (variable1 !== "" && variable2 !== "") {
         variable1 = calculate[operator](Number(variable1), Number(variable2)).toString();
@@ -115,6 +119,7 @@ handleExecution = function() {
     }
 }
 
+
 handleClearAll = function() {
     variable1 = "0";
     variable2 = "";
@@ -122,6 +127,7 @@ handleClearAll = function() {
     executed = "";
     displayScreen.innerText = displayFormat(variable1);
 }
+
 
 handleFactorial = function() {
     if (variable2 === "") {
@@ -173,6 +179,26 @@ handleFactorial = function() {
 }
 
 
+handlePercent = function() {
+    if (variable2 === "") {
+        operator = "";
+        variable1 = (Number(variable1) / 100).toString();
+        executed = "yes";
+        const formattedOutput = displayFormat(variable1);
+        displayScreen.innerText = formattedOutput;
+    };
+
+    if (variable2 !== "") {
+        const percentage = ((Number(variable2) / 100) * (Number(variable1))).toString();
+        variable1 = calculate[operator](Number(variable1), Number(percentage)).toString();
+        const formattedOutput = displayFormat(variable1);
+        displayScreen.innerText = formattedOutput;
+        operator = "";
+        executed = "yes";
+    }
+}
+
+
 button1.addEventListener('click', () => handleButtonPress(1));
 button2.addEventListener('click', () => handleButtonPress(2));
 button3.addEventListener('click', () => handleButtonPress(3));
@@ -192,6 +218,7 @@ buttonExponent.addEventListener('click', () => handleOperatorPress('**'));
 buttonRoot.addEventListener('click', () => handleOperatorPress('√'));
 
 buttonFactorial.addEventListener('click', () => handleFactorial());
+buttonPercent.addEventListener('click', () => handlePercent());
 
 buttonExecute.addEventListener('click', () => handleExecution());
 
