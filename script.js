@@ -13,6 +13,13 @@ const calculate = {
 };
 
 
+function displayFormat(value) {
+    const num = Number(value);
+    let fixedNum = num.toPrecision(7);
+    return Number(fixedNum);
+}
+
+
 const displayScreen = document.getElementById("numDisplay");
 
 const button1 = document.getElementById("1");
@@ -40,13 +47,13 @@ handleButtonPress = function(x) {
         operator = "";
         executed = "";
         variable1 = variable1 + x;
-        displayScreen.innerText = variable1;
+        displayScreen.innerText = displayFormat(variable1);
     } else if (operator === "") {
         variable1 = variable1 + x;
-        displayScreen.innerText = variable1;
+        displayScreen.innerText = displayFormat(variable1);
     } else {
         variable2 = variable2 + x;
-        displayScreen.innerText = variable2;
+        displayScreen.innerText = displayFormat(variable2);
     }
 }
 
@@ -59,14 +66,14 @@ handleOperatorPress = function(y) {
         variable1 = calculate[operator](Number(variable1), Number(variable2)).toString();
         operator = y;
         variable2 = "";
-        displayScreen.innerText = variable1;
+        displayScreen.innerText = displayFormat(variable1);
     }
 }
 
 handleExecution = function() {
     if (variable1 !== "" && variable2 !== "") {
         variable1 = calculate[operator](Number(variable1), Number(variable2)).toString();
-        displayScreen.innerText = variable1;
+        displayScreen.innerText = displayFormat(variable1);
         executed = "yes";
     }
 }
