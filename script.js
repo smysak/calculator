@@ -15,7 +15,20 @@ const calculate = {
 
 function displayFormat(value) {
     const num = Number(value);
-    let fixedNum = num.toPrecision(7);
+    if (isNaN(num) || !isFinite(num)) {
+        executed = "error";
+        return 'UR SO FUNNY';
+    }
+
+    let fixedNum = num.toPrecision(12);
+
+    if(fixedNum.includes('.')) {
+        fixedNum = fixedNum.replace(/\.?0+$/, '');
+    }
+
+    if (fixedNum.replace(/[.-]/g, '').length > 12 ) {
+        return num.toExponential(7);
+    }
     return Number(fixedNum);
 }
 
@@ -41,7 +54,7 @@ const buttonDivide = document.getElementById("divide");
 const buttonExecute = document.getElementById("execute");
 
 handleButtonPress = function(x) {
-    if (executed === "yes") {
+    if (executed === "yes" || executed === "error") {
         variable1 = "";
         variable2 = "";
         operator = "";
@@ -58,23 +71,39 @@ handleButtonPress = function(x) {
 }
 
 handleOperatorPress = function(y) {
-    if (variable2 === "" || executed === "yes") {
+    if (executed === "error") {
+        variable1 = "0";
+        variable2 = "";
+        operator = y;
+        executed = "";
+        displayScreen.innerText = displayFormat(variable1);
+    } else if (variable2 === "" || executed === "yes") {
         operator = y;
         executed = "";
         variable2 = "";
     } else {
         variable1 = calculate[operator](Number(variable1), Number(variable2)).toString();
-        operator = y;
-        variable2 = "";
-        displayScreen.innerText = displayFormat(variable1);
+        
+        const formattedOutput = displayFormat(variable1);
+        displayScreen.innerText = formattedOutput;
+
+        if (executed !== "error") {
+            operator = y;
+            variable2 = "";
+        }
     }
 }
 
 handleExecution = function() {
     if (variable1 !== "" && variable2 !== "") {
         variable1 = calculate[operator](Number(variable1), Number(variable2)).toString();
-        displayScreen.innerText = displayFormat(variable1);
-        executed = "yes";
+        
+        const formattedOutput = displayFormat(variable1);
+        displayScreen.innerText = formattedOutput;
+
+        if (executed !== "error") {
+            executed = "yes";
+        }
     }
 }
 
