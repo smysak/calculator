@@ -64,7 +64,7 @@ handleOperatorPress = function(y) {
 }
 
 handleExecution = function() {
-    if (variable1 != "" && variable2 != "") {
+    if (variable1 !== "" && variable2 !== "") {
         variable1 = calculate[operator](Number(variable1), Number(variable2)).toString();
         displayScreen.innerText = variable1;
         executed = "yes";
