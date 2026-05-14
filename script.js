@@ -51,6 +51,8 @@ const buttonSubtract = document.getElementById("subtract");
 const buttonMultiply = document.getElementById("multiply");
 const buttonDivide = document.getElementById("divide");
 
+const buttonClear = document.getElementById("clearAll");
+
 const buttonExecute = document.getElementById("execute");
 
 handleButtonPress = function(x) {
@@ -107,6 +109,14 @@ handleExecution = function() {
     }
 }
 
+handleClearAll = function() {
+    variable1 = "0";
+    variable2 = "";
+    operator = "";
+    executed = "";
+    displayScreen.innerText = displayFormat(variable1);
+}
+
 
 button1.addEventListener('click', () => handleButtonPress(1));
 button2.addEventListener('click', () => handleButtonPress(2));
@@ -125,3 +135,5 @@ buttonMultiply.addEventListener('click', () => handleOperatorPress(`*`));
 buttonDivide.addEventListener('click', () => handleOperatorPress(`/`));
 
 buttonExecute.addEventListener('click', () => handleExecution());
+
+buttonClear.addEventListener('click', () => handleClearAll());
