@@ -130,8 +130,13 @@ handleClearAll = function() {
 
 
 handleFactorial = function() {
-    if (variable2 === "") {
+    if (executed === "error") {
+        handleClearAll();
+
+    } else if (variable2 === "" || executed === "yes") {
         operator = "";
+        executed = "";
+        variable2 = "";
 
         const array = [];
         let num = variable1;
@@ -139,6 +144,7 @@ handleFactorial = function() {
             array.push(num);
             num = num-1;
         };
+
         let factorial = array.reduce((accumulator, currentValue) => {
             return accumulator * currentValue;
         }, 1);
@@ -151,16 +157,15 @@ handleFactorial = function() {
         const formattedOutput = displayFormat(variable1);
         displayScreen.innerText = formattedOutput;
         executed = "yes";
-    }
 
-    if (variable2 !== "") {
-
+    } else {
         const array = [];
         let num = variable2;
         for (let i = 0; i < variable2; i++) {
             array.push(num);
             num = num-1;
         };
+
         let factorial = array.reduce((accumulator, currentValue) => {
             return accumulator * currentValue;
         }, 1);
@@ -168,7 +173,7 @@ handleFactorial = function() {
         if (variable2 !==1 && factorial === 1) {
             factorial = "NaN";
         }
-
+        
         variable2 = "";
         variable1 = calculate[operator](Number(variable1), Number(factorial)).toString();
         const formattedOutput = displayFormat(variable1);
