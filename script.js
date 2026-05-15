@@ -116,6 +116,8 @@ handleExecution = function() {
         if (executed !== "error") {
             executed = "yes";
         }
+        
+        executed = "yes"
     }
 }
 
@@ -173,7 +175,7 @@ handleFactorial = function() {
         if (variable2 !==1 && factorial === 1) {
             factorial = "NaN";
         }
-        
+
         variable2 = "";
         variable1 = calculate[operator](Number(variable1), Number(factorial)).toString();
         const formattedOutput = displayFormat(variable1);
@@ -185,23 +187,26 @@ handleFactorial = function() {
 
 
 handlePercent = function() {
-    if (variable2 === "") {
+    if (executed === "error") {
+        handleClearAll();
+
+    } else if (variable2 === "" || executed === "yes") {
         operator = "";
+        executed = "";
+        variable2 = "";
         variable1 = (Number(variable1) / 100).toString();
-        executed = "yes";
         const formattedOutput = displayFormat(variable1);
         displayScreen.innerText = formattedOutput;
-    };
 
-    if (variable2 !== "") {
+    } else {        
         const percentage = ((Number(variable2) / 100) * (Number(variable1))).toString();
         variable1 = calculate[operator](Number(variable1), Number(percentage)).toString();
         const formattedOutput = displayFormat(variable1);
         displayScreen.innerText = formattedOutput;
         operator = "";
-        executed = "yes";
     }
 }
+
 
 
 button1.addEventListener('click', () => handleButtonPress(1));
