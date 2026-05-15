@@ -116,7 +116,7 @@ handleExecution = function() {
         if (executed !== "error") {
             executed = "yes";
         }
-        
+
         executed = "yes"
     }
 }
@@ -198,12 +198,19 @@ handlePercent = function() {
         const formattedOutput = displayFormat(variable1);
         displayScreen.innerText = formattedOutput;
 
-    } else {        
-        const percentage = ((Number(variable2) / 100) * (Number(variable1))).toString();
+    } else {
+        let percentage = "";
+
+        if (operator === "+") {
+            percentage = ((Number(variable2) / 100) * (Number(variable1)));
+        } else {
+            percentage = (Number(variable2) / 100);
+        }
         variable1 = calculate[operator](Number(variable1), Number(percentage)).toString();
         const formattedOutput = displayFormat(variable1);
         displayScreen.innerText = formattedOutput;
         operator = "";
+        executed = "yes";
     }
 }
 
