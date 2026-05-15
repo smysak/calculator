@@ -64,7 +64,7 @@ const buttonClear = document.getElementById("clearAll");
 const buttonExecute = document.getElementById("execute");
 
 
-handleButtonPress = function(x) {
+function handleButtonPress(x) {
 	if (executed === "yes" || executed === "error") {
 		variable1 = "";
 		variable2 = "";
@@ -82,7 +82,7 @@ handleButtonPress = function(x) {
 }
 
 
-handleDecimalPoint = function() {
+function handleDecimalPoint() {
 	if (executed === "yes" || executed === "error") {
 		variable2 = "";
 		operator = "";
@@ -110,7 +110,7 @@ handleDecimalPoint = function() {
 }
 
 
-handleOperatorPress = function(y) {
+function handleOperatorPress(y) {
 	if (executed === "error") {
 		variable1 = "0";
 		variable2 = "";
@@ -135,7 +135,7 @@ handleOperatorPress = function(y) {
 }
 
 
-handleExecution = function() {
+function handleExecution() {
 	if (variable1 !== "" && variable2 !== "") {
 		variable1 = calculate[operator](Number(variable1), Number(variable2)).toString();
 
@@ -151,7 +151,7 @@ handleExecution = function() {
 }
 
 
-handleClearAll = function() {
+function handleClearAll() {
 	variable1 = "0";
 	variable2 = "";
 	operator = "";
@@ -160,7 +160,7 @@ handleClearAll = function() {
 }
 
 
-handleFactorial = function() {
+function handleFactorial() {
 	if (executed === "error") {
 		handleClearAll();
 
@@ -215,7 +215,7 @@ handleFactorial = function() {
 }
 
 
-handlePercent = function() {
+function handlePercent() {
 	if (executed === "error") {
 		handleClearAll();
 
@@ -255,7 +255,7 @@ button8.addEventListener('click', () => handleButtonPress(8));
 button9.addEventListener('click', () => handleButtonPress(9));
 button0.addEventListener('click', () => handleButtonPress(0));
 
-buttonDecimal.addEventListener('click', () => handleDecimalPoint());
+buttonDecimal.addEventListener('click', handleDecimalPoint);
 
 buttonAdd.addEventListener('click', () => handleOperatorPress(`+`));
 buttonSubtract.addEventListener('click', () => handleOperatorPress(`-`));
@@ -264,9 +264,9 @@ buttonDivide.addEventListener('click', () => handleOperatorPress(`/`));
 buttonExponent.addEventListener('click', () => handleOperatorPress('**'));
 buttonRoot.addEventListener('click', () => handleOperatorPress('√'));
 
-buttonFactorial.addEventListener('click', () => handleFactorial());
-buttonPercent.addEventListener('click', () => handlePercent());
+buttonFactorial.addEventListener('click', handleFactorial);
+buttonPercent.addEventListener('click', handlePercent);
 
-buttonExecute.addEventListener('click', () => handleExecution());
+buttonExecute.addEventListener('click', handleExecution);
 
-buttonClear.addEventListener('click', () => handleClearAll());
+buttonClear.addEventListener('click', handleClearAll);
