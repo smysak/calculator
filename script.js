@@ -270,3 +270,41 @@ buttonPercent.addEventListener('click', handlePercent);
 buttonExecute.addEventListener('click', handleExecution);
 
 buttonClear.addEventListener('click', handleClearAll);
+
+window.addEventListener('keydown', keyboardSupport);
+
+function keyboardSupport(event) {
+	if (event.key === 'Backspace') {
+		event.preventDefault();
+		
+		if (variable2 === "" && variable1 !== "") {
+			variable1 = variable1.slice(0,-1);
+			displayScreen.innerText = displayFormat(variable1);
+		}
+
+		if (variable2 !== "") {
+			variable2 = variable2.slice(0,-1);
+			displayScreen.innerText = displayFormat(variable2);
+		}
+	};
+
+	if (event.key === " " || event.key === "Enter") {
+		handleExecution();
+	};
+
+	if (event.key === "%") {
+		handlePercent();
+	};
+
+	if (event.key === ".") {
+		handleDecimalPoint();
+	};
+
+	if (/^[0-9]$/.test(event.key)) {
+		handleButtonPress(event.key);
+	};
+
+	if (/^[\+\-\/\*]$/.test(event.key)) {
+		handleOperatorPress(event.key);
+	};
+}
