@@ -47,6 +47,7 @@ const button7 = document.getElementById("7");
 const button8 = document.getElementById("8");
 const button9 = document.getElementById("9");
 const button0 = document.getElementById("0");
+const buttonDecimal = document.getElementById("decimalPoint");
 
 const buttonAdd = document.getElementById("add");
 const buttonSubtract = document.getElementById("subtract");
@@ -77,6 +78,34 @@ handleButtonPress = function(x) {
 	} else {
 		variable2 = variable2 + x;
 		displayScreen.innerText = displayFormat(variable2);
+	}
+}
+
+
+handleDecimalPoint = function() {
+	if (executed === "yes" || executed === "error") {
+		variable2 = "";
+		operator = "";
+		executed = "";
+		variable1 = "0.";
+		displayScreen.innerText = displayFormat(variable1);
+	} else if (operator === "") {
+		if (variable1.includes('.')) {
+			return;
+		} else {
+			variable1 = variable1 + ".";
+			displayScreen.innerText = displayFormat(variable1);
+		}
+	} else if (operator !== "" && variable2 === "") {
+		variable2 = "0.";
+		displayScreen.innerText = displayFormat(variable2);
+	} else {
+		if (variable2.includes('.')) {
+			return;
+		} else {
+			variable2 = variable2 + ".";
+			displayScreen.innerText = displayFormat(variable2);
+		}
 	}
 }
 
@@ -225,6 +254,8 @@ button7.addEventListener('click', () => handleButtonPress(7));
 button8.addEventListener('click', () => handleButtonPress(8));
 button9.addEventListener('click', () => handleButtonPress(9));
 button0.addEventListener('click', () => handleButtonPress(0));
+
+buttonDecimal.addEventListener('click', () => handleDecimalPoint());
 
 buttonAdd.addEventListener('click', () => handleOperatorPress(`+`));
 buttonSubtract.addEventListener('click', () => handleOperatorPress(`-`));
