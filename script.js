@@ -6,32 +6,32 @@ let executed = "";
 
 
 const calculate = {
-  '+': (a, b) => a + b,
-  '-': (a, b) => a - b,
-  '*': (a, b) => a * b,
-  '/': (a, b) => a / b,
-  '**': (a, b) => a ** b,
-  '√': (a, b) => b ** (1/a),
+	'+': (a, b) => a + b,
+	'-': (a, b) => a - b,
+	'*': (a, b) => a * b,
+	'/': (a, b) => a / b,
+	'**': (a, b) => a ** b,
+	'√': (a, b) => b ** (1/a),
 };
 
 
 function displayFormat(value) {
-    const num = Number(value);
-    if (isNaN(num) || !isFinite(num)) {
-        executed = "error";
-        return 'error';
-    }
+	const num = Number(value);
+	if (isNaN(num) || !isFinite(num)) {
+		executed = "error";
+		return 'error';
+	}
 
-    let fixedNum = num.toPrecision(12);
+	let fixedNum = num.toPrecision(12);
 
-    if(fixedNum.includes('.')) {
-        fixedNum = fixedNum.replace(/\.?0+$/, '');
-    }
+	if(fixedNum.includes('.')) {
+		fixedNum = fixedNum.replace(/\.?0+$/, '');
+	}
 
-    if (fixedNum.replace(/[.-]/g, '').length > 12 ) {
-        return num.toExponential(7);
-    }
-    return Number(fixedNum);
+	if (fixedNum.replace(/[.-]/g, '').length > 12 ) {
+		return num.toExponential(7);
+	}
+	return Number(fixedNum);
 }
 
 
@@ -64,156 +64,155 @@ const buttonExecute = document.getElementById("execute");
 
 
 handleButtonPress = function(x) {
-    if (executed === "yes" || executed === "error") {
-        variable1 = "";
-        variable2 = "";
-        operator = "";
-        executed = "";
-        variable1 = variable1 + x;
-        displayScreen.innerText = displayFormat(variable1);
-    } else if (operator === "") {
-        variable1 = variable1 + x;
-        displayScreen.innerText = displayFormat(variable1);
-    } else {
-        variable2 = variable2 + x;
-        displayScreen.innerText = displayFormat(variable2);
-    }
+	if (executed === "yes" || executed === "error") {
+		variable1 = "";
+		variable2 = "";
+		operator = "";
+		executed = "";
+		variable1 = variable1 + x;
+		displayScreen.innerText = displayFormat(variable1);
+	} else if (operator === "") {
+		variable1 = variable1 + x;
+		displayScreen.innerText = displayFormat(variable1);
+	} else {
+		variable2 = variable2 + x;
+		displayScreen.innerText = displayFormat(variable2);
+	}
 }
 
 
 handleOperatorPress = function(y) {
-    if (executed === "error") {
-        variable1 = "0";
-        variable2 = "";
-        operator = y;
-        executed = "";
-        displayScreen.innerText = displayFormat(variable1);
-    } else if (variable2 === "" || executed === "yes") {
-        operator = y;
-        executed = "";
-        variable2 = "";
-    } else {
-        variable1 = calculate[operator](Number(variable1), Number(variable2)).toString();
-        
-        const formattedOutput = displayFormat(variable1);
-        displayScreen.innerText = formattedOutput;
+	if (executed === "error") {
+		variable1 = "0";
+		variable2 = "";
+		operator = y;
+		executed = "";
+		displayScreen.innerText = displayFormat(variable1);
+	} else if (variable2 === "" || executed === "yes") {
+		operator = y;
+		executed = "";
+		variable2 = "";
+	} else {
+		variable1 = calculate[operator](Number(variable1), Number(variable2)).toString();
 
-        if (executed !== "error") {
-            operator = y;
-            variable2 = "";
-        }
-    }
+		const formattedOutput = displayFormat(variable1);
+		displayScreen.innerText = formattedOutput;
+
+		if (executed !== "error") {
+			operator = y;
+			variable2 = "";
+		}
+	}
 }
 
 
 handleExecution = function() {
-    if (variable1 !== "" && variable2 !== "") {
-        variable1 = calculate[operator](Number(variable1), Number(variable2)).toString();
-        
-        const formattedOutput = displayFormat(variable1);
-        displayScreen.innerText = formattedOutput;
+	if (variable1 !== "" && variable2 !== "") {
+		variable1 = calculate[operator](Number(variable1), Number(variable2)).toString();
 
-        if (executed !== "error") {
-            executed = "yes";
-        }
+		const formattedOutput = displayFormat(variable1);
+		displayScreen.innerText = formattedOutput;
 
-        executed = "yes"
-    }
+		if (executed !== "error") {
+			executed = "yes";
+		}
+
+		executed = "yes"
+	}
 }
 
 
 handleClearAll = function() {
-    variable1 = "0";
-    variable2 = "";
-    operator = "";
-    executed = "";
-    displayScreen.innerText = displayFormat(variable1);
+	variable1 = "0";
+	variable2 = "";
+	operator = "";
+	executed = "";
+	displayScreen.innerText = displayFormat(variable1);
 }
 
 
 handleFactorial = function() {
-    if (executed === "error") {
-        handleClearAll();
+	if (executed === "error") {
+		handleClearAll();
 
-    } else if (variable2 === "" || executed === "yes") {
-        operator = "";
-        executed = "";
-        variable2 = "";
+	} else if (variable2 === "" || executed === "yes") {
+		operator = "";
+		executed = "";
+		variable2 = "";
 
-        const array = [];
-        let num = variable1;
-        for (let i = 0; i < variable1; i++) {
-            array.push(num);
-            num = num-1;
-        };
+		const array = [];
+		let num = variable1;
+		for (let i = 0; i < variable1; i++) {
+			array.push(num);
+			num = num-1;
+		};
 
-        let factorial = array.reduce((accumulator, currentValue) => {
-            return accumulator * currentValue;
-        }, 1);
+		let factorial = array.reduce((accumulator, currentValue) => {
+			return accumulator * currentValue;
+		}, 1);
 
-        if (variable1 !==1 && factorial === 1) {
-            factorial = "NaN";
-        }
+		if (variable1 !==1 && factorial === 1) {
+			factorial = "NaN";
+		}
 
-        variable1 = factorial;
-        const formattedOutput = displayFormat(variable1);
-        displayScreen.innerText = formattedOutput;
-        executed = "yes";
+		variable1 = factorial;
+		const formattedOutput = displayFormat(variable1);
+		displayScreen.innerText = formattedOutput;
+		executed = "yes";
 
-    } else {
-        const array = [];
-        let num = variable2;
-        for (let i = 0; i < variable2; i++) {
-            array.push(num);
-            num = num-1;
-        };
+	} else {
+		const array = [];
+		let num = variable2;
+		for (let i = 0; i < variable2; i++) {
+			array.push(num);
+			num = num-1;
+		};
 
-        let factorial = array.reduce((accumulator, currentValue) => {
-            return accumulator * currentValue;
-        }, 1);
+		let factorial = array.reduce((accumulator, currentValue) => {
+			return accumulator * currentValue;
+		}, 1);
 
-        if (variable2 !==1 && factorial === 1) {
-            factorial = "NaN";
-        }
+		if (variable2 !==1 && factorial === 1) {
+			factorial = "NaN";
+		}
 
-        variable2 = "";
-        variable1 = calculate[operator](Number(variable1), Number(factorial)).toString();
-        const formattedOutput = displayFormat(variable1);
-        displayScreen.innerText = formattedOutput;
-        operator = "";
-        executed = "yes";
-    }
+		variable2 = "";
+		variable1 = calculate[operator](Number(variable1), Number(factorial)).toString();
+		const formattedOutput = displayFormat(variable1);
+		displayScreen.innerText = formattedOutput;
+		operator = "";
+		executed = "yes";
+	}
 }
 
 
 handlePercent = function() {
-    if (executed === "error") {
-        handleClearAll();
+	if (executed === "error") {
+		handleClearAll();
 
-    } else if (variable2 === "" || executed === "yes") {
-        operator = "";
-        executed = "";
-        variable2 = "";
-        variable1 = (Number(variable1) / 100).toString();
-        const formattedOutput = displayFormat(variable1);
-        displayScreen.innerText = formattedOutput;
+	} else if (variable2 === "" || executed === "yes") {
+		operator = "";
+		executed = "";
+		variable2 = "";
+		variable1 = (Number(variable1) / 100).toString();
+		const formattedOutput = displayFormat(variable1);
+		displayScreen.innerText = formattedOutput;
 
-    } else {
-        let percentage = "";
+	} else {
+		let percentage = "";
 
-        if (operator === "+") {
-            percentage = ((Number(variable2) / 100) * (Number(variable1)));
-        } else {
-            percentage = (Number(variable2) / 100);
-        }
-        variable1 = calculate[operator](Number(variable1), Number(percentage)).toString();
-        const formattedOutput = displayFormat(variable1);
-        displayScreen.innerText = formattedOutput;
-        operator = "";
-        executed = "yes";
-    }
+		if (operator === "+") {
+			percentage = ((Number(variable2) / 100) * (Number(variable1)));
+		} else {
+			percentage = (Number(variable2) / 100);
+		}
+		variable1 = calculate[operator](Number(variable1), Number(percentage)).toString();
+		const formattedOutput = displayFormat(variable1);
+		displayScreen.innerText = formattedOutput;
+		operator = "";
+		executed = "yes";
+	}
 }
-
 
 
 button1.addEventListener('click', () => handleButtonPress(1));
